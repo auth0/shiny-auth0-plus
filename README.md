@@ -20,4 +20,4 @@ SHINY_PORT=3838
 PORT=3000
 ````
 
-Once you've set those 3 environment variables, just run `npm start` and try calling [http://localhost:3000/](http://localhost:3000/)
+Once you've set those environment variables, just run `npm start` and try calling [http://localhost:3000/](http://localhost:3000/)

@@ -15,10 +15,13 @@ router.get('/', function(req, res, next) {
   res.redirect('/reports/');
 });
 
+var ppoptions = {scope: ['openid', 'name', 'email', 'picture'], 'audience':'urn:shiny:dev',  failureRedirect: '/login'};
+
 router.get('/login',
-  function(req, res){
-    res.render('login', { env: env });
-  });
+  passport.authenticate('auth0', ppoptions), function (req, res) {
+  res.redirect("/");
+});
+
 
 router.get('/logout', function(req, res){
   req.logout();
@@ -26,9 +29,10 @@ router.get('/logout', function(req, res){
 });
 
 router.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect(req.session.returnTo || '/reports/');
+  passport.authenticate('auth0', ppoptions),
+  function(req, res){
+    console.log(req);
+    res.render('callback', { env: {'returnTo': req.session.returnTo || '/reports/', 'accessToken': req.user.accessToken}})
   });
 
 

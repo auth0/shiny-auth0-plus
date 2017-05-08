@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+  h1= title
+  p
+    center Please wait, logging in...
+  br
+
+  script.
+    localStorage.setItem("accessToken", '#{env.accessToken}');
+    window.location = '#{env.returnTo}';
