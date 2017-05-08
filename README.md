@@ -14,6 +14,7 @@ AUTH0_CLIENT_SECRET=myCoolSecret
 AUTH0_CLIENT_ID=myCoolClientId
 AUTH0_DOMAIN=myCoolDomain
 AUTH0_CALLBACK_URL=https://my.url.com/
+AUTH0_AUDIENCE=urn:shiny:dev
 COOKIE_SECRET=somethingRandomHerePlease
 SHINY_HOST=localhost
 SHINY_PORT=3838
