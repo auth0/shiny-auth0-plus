@@ -13,6 +13,7 @@ var proxy = httpProxy.createProxyServer({
 
 proxy.on('error', function (err, req, res) {
   console.log('Something went wrong.');
+  console.log(err);
 });
 
 var setIfExists = function(proxyReq, header, value){
