@@ -13,6 +13,7 @@ dotenv.load();
 
 var routes = require('./routes/index');
 var reports = require('./routes/reports');
+var admin = require('./routes/admin');
 
 // This will configure Passport to use Auth0
 var strategy = new Auth0Strategy({
