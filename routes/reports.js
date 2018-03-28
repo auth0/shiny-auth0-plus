@@ -12,11 +12,7 @@ var proxy = httpProxy.createProxyServer({
 });
 
 proxy.on('error', function (err, req, res) {
-  res.writeHead(500, {
-    'Content-Type': 'text/plain'
-  });
-
-  res.end('Something went wrong.');
+  console.log('Something went wrong.');
 });
 
 var setIfExists = function(proxyReq, header, value){
