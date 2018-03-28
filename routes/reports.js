@@ -32,7 +32,7 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
 
 /* Proxy all requests */
 router.all(/.*/, ensureLoggedIn, function(req, res, next) {
-  proxy.web(req, res);
+  proxy.web(req, res, {target: {host: process.env.SHINY_HOST, port: process.env.SHINY_PORT}}, function(e){});
 });
 
 module.exports = router;
