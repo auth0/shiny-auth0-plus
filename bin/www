@@ -39,6 +39,14 @@ var proxy = httpProxy.createProxyServer({
     }
 });
 
+proxy.on('error', function (err, req, res) {
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+
+  res.end('Something went wrong.');
+});
+
 server.on('upgrade', function (req, socket, head) {
   req.url = req.url.substring(8);
   proxy.ws(req, socket, head);
