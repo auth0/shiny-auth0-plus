@@ -11,9 +11,12 @@ var proxy = httpProxy.createProxyServer({
     }
 });
 
-proxy.on('error', function(e) {
-  console.log('Error connecting to shiny server admin');
-  console.log(e);
+proxy.on('error', function (err, req, res) {
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+
+  res.end('Something went wrong.');
 });
 
 var setIfExists = function(proxyReq, header, value){
@@ -29,11 +32,7 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
 
 /* Proxy all requests */
 router.all(/.*/, ensureLoggedIn, function(req, res, next) {
-  proxy.web(req, res, {host: process.env.SHINY_HOST,port: process.env.SHINY_ADMIN_PORT},
-  function(e) {
-    console.log('Error connecting to shiny server');
-    console.log(e);
-  });
+    proxy.web(req, res);
 });
 
 module.exports = router;
