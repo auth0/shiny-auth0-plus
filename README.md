@@ -18,6 +18,7 @@ AUTH0_AUDIENCE=urn:shiny:dev
 COOKIE_SECRET=somethingRandomHerePlease
 SHINY_HOST=localhost
 SHINY_PORT=3838
+SHINY_ADMIN_PORT=4151
 PORT=3000
 ````
 
