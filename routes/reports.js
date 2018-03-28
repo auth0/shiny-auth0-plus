@@ -22,6 +22,11 @@ var setIfExists = function(proxyReq, header, value){
   }
 }
 
+proxy.on('proxyReq', function(proxyReq, req, res, options) {
+  setIfExists(proxyReq, 'x-auth0-user-id', req.user._json.user_id);
+  setIfExists(proxyReq, 'x-auth0-groups', req.user._json.groups);
+});
+
 /* Proxy all requests */
 router.all(/.*/, ensureLoggedIn, function(req, res, next) {
   proxy.web(req, res);
