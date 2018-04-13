@@ -32,21 +32,39 @@ server.on('listening', onListening);
 
 /* Proxy websockets */
 
-var proxy = httpProxy.createProxyServer({
+var proxyReports = httpProxy.createProxyServer({
   target: {
       host: process.env.SHINY_HOST,
       port: process.env.SHINY_PORT
     }
 });
 
-proxy.on('error', function (err, req, res) {
+var proxyAdmin = httpProxy.createProxyServer({
+  target: {
+      host: process.env.SHINY_HOST,
+      port: process.env.SHINY_ADMIN_PORT
+    }
+});
+
+proxyReports.on('error', function (err, req, res) {
   console.log('Something went wrong.');
   console.log(err);
 });
 
+proxyAdmin.on('error', function (err, req, res) {
+  console.log('Something went wrong.');
+  console.log(err);
+});
+
+
 server.on('upgrade', function (req, socket, head) {
-  req.url = req.url.substring(8);
-  proxy.ws(req, socket, head);
+  destination = req.url.split("/", 2)[1];
+  req.url = req.url.substring(destination.length+2);
+  if(destination=='admin'){
+    proxyAdmin.ws(req, socket, head);
+  }else{
+    proxyReports.ws(req, socket, head);
+  }
 });
 
 
