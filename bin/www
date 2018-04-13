@@ -59,7 +59,7 @@ proxyAdmin.on('error', function (err, req, res) {
 
 server.on('upgrade', function (req, socket, head) {
   destination = req.url.split("/", 2)[1];
-  req.url = req.url.substring(destination.length+2);
+  req.url = req.url.substring(destination.length+1);
   if(destination=='admin'){
     proxyAdmin.ws(req, socket, head);
   }else{
