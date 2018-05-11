@@ -25,7 +25,9 @@ var setIfExists = function(proxyReq, header, value){
 proxy.on('proxyReq', function(proxyReq, req, res, options) {
   setIfExists(proxyReq, 'x-auth0-user-id', req.user._json.sub);
   setIfExists(proxyReq, 'x-auth0-email', req.user._json.email);
-  setIfExists(proxyReq, 'x-auth0-groups', req.user._json[process.env.AUTH0_GROUPS_CLAIM].toString());
+  if(process.env.AUTH0_GROUPS_CLAIM in req.user._json){
+    setIfExists(proxyReq, 'x-auth0-groups', req.user._json[process.env.AUTH0_GROUPS_CLAIM].toString());
+  }
 });
 
 /* Proxy all requests */
