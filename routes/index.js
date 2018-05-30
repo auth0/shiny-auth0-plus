@@ -8,7 +8,7 @@ var env = {
   AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
   AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
   AUTH0_CALLBACK_URL: process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback',
-  AUTH0_AUDIENCE: process.env.AUTH0_AUDIENCE  
+  AUTH0_AUDIENCE: process.env.AUTH0_AUDIENCE
 }
 
 /* GET home page. */
@@ -26,7 +26,7 @@ router.get('/login',
 
 router.get('/logout', function(req, res){
   req.logout();
-  res.redirect('/login');
+  res.redirect('https://' + AUTH0_DOMAIN + '/v2/logout');
 });
 
 router.get('/callback',
