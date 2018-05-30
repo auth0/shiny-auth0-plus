@@ -27,7 +27,7 @@ router.get('/login',
 
 router.get('/logout', function(req, res){
   req.logout();
-  res.redirect('https://' + env.AUTH0_DOMAIN + '/v2/logout?returnTo=' + encodeURIComponent(env.AUTH0_LOGOUT_URL));
+  res.redirect('https://' + env.AUTH0_DOMAIN + '/v2/logout?returnTo=' + encodeURIComponent(env.AUTH0_LOGOUT_URL) + '&client_id=' + env.AUTH0_CLIENT_ID);
 });
 
 router.get('/callback',
